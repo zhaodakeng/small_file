@@ -1,0 +1,39 @@
+server:
+  port: 8080
+  #视图层控制 用mvc方式访问templates下的HTML
+spring:
+  jpa:
+    #显示sql语句
+    show-sql: true
+    #通过实体反向建表
+    hibernate:
+      ddl-auto: update #update----每次运行程序，没有表格会新建表格，表内有数据不会清空，只会更新 validate----运行程序会校验数据与数据库的字段类型是否相同，不同会报错
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  static-path-pattern: /static/**
+  encoding: UTF-8
+  #开发时关闭缓存,不然没法看到实时页面
+  cache: true
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/file?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  # Hikari will use the above plus the following to setup connection pooling
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 15
+      maximum-pool-size: 512
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: DatebookHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+  # 最大支持文件大小
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      # 最大支持请求大小
+      max-request-size: 500MB
+
+
